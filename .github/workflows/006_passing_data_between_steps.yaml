@@ -8,10 +8,10 @@ on:
       runbs-on: ubuntu-22.04
       steps:
         - name: Create data
-        id: sender
-        # this step will set the output name for thgis to Michal
-        run: |
-          echo "name=Michal" >> $GITHUB_OUTPUT
+          id: sender
+          # this step will set the output name for thgis to Michal
+          run: |
+            echo "name=Michal" >> $GITHUB_OUTPUT
 
         - name: Receive data
           run: |
