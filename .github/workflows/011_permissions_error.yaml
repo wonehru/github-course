@@ -1,0 +1,29 @@
+name: "11 Permissions Error"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read  # I can only read commits/tags I cannot create ones from this workflow 
+
+jobs:
+  example-job:
+    # It can be also here for job scope
+    # permissions:
+    #   contents: read
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Attempt Write Operation
+        run: |
+          # This is an intentional error to demonstrate lack of write permissions
+          touch new-file.txt
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your-username@users.noreply.github.com'
+          git add new-file.txt
+          git commit -m "Attempt to write"
+          git push origin ${{ github.ref }}
+        continue-on-error: true
